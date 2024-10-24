@@ -33,16 +33,4 @@ public class PlayerHealth : MonoBehaviour
         Destroy(gameObject);  // Esto destruirá al jugador, pero puedes reemplazarlo por otra lógica
     }
 
-    // (Opcional) Método para recuperar salud
-    public void Heal(int healAmount)
-    {
-        currentHealth += healAmount;
-
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;  // Asegurarse de que no exceda la salud máxima
-        }
-
-        Debug.Log("El jugador ha sido curado. Salud actual: " + currentHealth);
-    }
 }
