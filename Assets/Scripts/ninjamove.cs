@@ -10,7 +10,12 @@ public class NewBehaviourScript : MonoBehaviour
     public float JumpForce;  // Establece un valor por defecto
     public float Speed;      // Establece un valor por defecto
     private bool Grounded;
- 
+    public Transform AreaAtaque;
+    public float AttackRange;
+    public int damage;
+    public LayerMask Enemylayer;
+    private float leftLimit, rightLimit;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,18 +50,42 @@ public class NewBehaviourScript : MonoBehaviour
             Jump();
             Debug.Log("Intentando saltar");
         }
+
+        
         
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        // Movimiento horizontal
+        // Movimiento horizontal del jugador
         Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y);
+
+        // Obtener los límites de la cámara
+        SetMovementLimits();
+
+        // Limitar la posición del jugador dentro de los límites de la cámara
+        Vector3 position = transform.position;
+        position.x = Mathf.Clamp(position.x, leftLimit, rightLimit);
+        transform.position = position;
     }
+
 
     private void Jump()
     {
 
         Rigidbody2D.AddForce(Vector2.up * JumpForce);
     }
+
+    private void SetMovementLimits()
+    {
+        // Obtener la posición de los bordes izquierdo y derecho de la cámara en el mundo
+        Vector3 cameraLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        Vector3 cameraRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
+
+        // Definir los límites basados en la posición de la cámara
+        leftLimit = cameraLeft.x + 1f; // Agregar un margen
+        rightLimit = cameraRight.x - 1f; // Agregar un margen
+    }
+
+
 }
