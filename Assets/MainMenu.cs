@@ -31,4 +31,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("InicioMenu");
     }
+
+    public void SalirDelJuego()
+    {
+        Debug.Log("El juego se cerrará."); // Mensaje para verificar en el editor
+        Application.Quit();
+    }
+
 }
