@@ -540,7 +540,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2115346976}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: Config
+        m_MethodName: SalirDelJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
