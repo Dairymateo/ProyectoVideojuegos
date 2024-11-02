@@ -13,12 +13,12 @@ public class NewBehaviourScript : MonoBehaviour
 
     // Variables de ataque
     public Transform AttackPoint;
-    public float AttackRange = 0.5f;
-    public int AttackDamage = 20;
+    public float AttackRange;
+    public int AttackDamage;
     public LayerMask EnemyLayers;
 
     private bool isAttacking = false;
-    private float attackCooldown = 0.5f;
+    private float attackCooldown;
     private float lastAttackTime;
 
     // Start is called before the first frame update
@@ -44,9 +44,11 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * 1.2f, Color.yellow);
         Grounded = Physics2D.Raycast(transform.position, Vector3.down, 1.2f);
 
+
         // Saltar si está en el suelo y se presiona espacio
         if (Input.GetKeyDown(KeyCode.Space) && Grounded)
         {
+            Debug.Log("El personaje está en el suelo.");
             Jump();
         }
 
