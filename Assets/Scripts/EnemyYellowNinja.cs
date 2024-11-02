@@ -6,16 +6,16 @@ public class EnemyYellowNinja : MonoBehaviour
 {
     private Rigidbody2D Rigidbody2D;
     private Animator Animator;
-    public Transform Player;
-    public float Speed;
+    public Transform Player;  // Referencia al jugador
+    public float Speed ;
     public float AttackRange;
     public float AttackCooldown;
-    public int damage;
+    public int damage = 10;
     private float attackTimer;
 
+    // Límites de la cámara
     private float minX;
     private float maxX;
-    public float minDistanceFromPlayer; // Distancia mínima al jugador
 
     private bool isDead = false; // Estado de muerte del enemigo
 
@@ -25,6 +25,7 @@ public class EnemyYellowNinja : MonoBehaviour
         Animator = GetComponent<Animator>();
         attackTimer = AttackCooldown;
 
+        // Calcular los límites basados en la cámara principal
         Camera camera = Camera.main;
         float cameraHeight = 2f * camera.orthographicSize;
         float cameraWidth = cameraHeight * camera.aspect;
@@ -38,7 +39,11 @@ public class EnemyYellowNinja : MonoBehaviour
         if (isDead) return; // Si está muerto, no hace nada
 
         attackTimer += Time.deltaTime;
+
+        // Si no está atacando, seguir al jugador
         FollowPlayer();
+
+        // Limitar el movimiento del enemigo dentro de los límites
         RestrictMovement();
     }
 
@@ -50,30 +55,24 @@ public class EnemyYellowNinja : MonoBehaviour
             return;
         }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, Player.position);
-
-        if (distanceToPlayer > minDistanceFromPlayer)
+        if (!IsPlayerInRange())
         {
-            if (!IsPlayerInRange())
-            {
-                float direction = Mathf.Sign(Player.position.x - transform.position.x);
-                Rigidbody2D.velocity = new Vector2(direction * Speed, Rigidbody2D.velocity.y);
+            // Seguir al jugador
+            float direction = Mathf.Sign(Player.position.x - transform.position.x);
+            Rigidbody2D.velocity = new Vector2(direction * Speed, Rigidbody2D.velocity.y);
 
-                if (direction < 0.0f) transform.localScale = new Vector3(-6.0f, 6.0f, 6.0f);
-                else transform.localScale = new Vector3(6.0f, 6.0f, 6.0f);
+            // Cambiar la dirección del enemigo
+            if (direction < 0.0f) transform.localScale = new Vector3(-6.0f, 6.0f, 6.0f);
+            else transform.localScale = new Vector3(6.0f, 6.0f, 6.0f);
 
-                Animator.SetBool("running2", true);
-            }
-            else
-            {
-                Animator.SetBool("running2", false);
-                Attack();
-            }
+            // Activar animación de correr
+            Animator.SetBool("running2", true);
         }
         else
         {
-            Rigidbody2D.velocity = Vector2.zero; // Detiene al enemigo si está demasiado cerca
+            // Detener la animación de correr
             Animator.SetBool("running2", false);
+            Attack();
         }
     }
 
@@ -85,12 +84,22 @@ public class EnemyYellowNinja : MonoBehaviour
 
     private void Attack()
     {
+        // Si está en tiempo de ataque, no hace nada
         if (attackTimer < AttackCooldown)
             return;
 
+        // Reiniciar el temporizador de ataque
         attackTimer = 0f;
+<<<<<<< Updated upstream
         Animator.SetTrigger("Attack2");
         
+=======
+
+        // Activar la animación de ataque
+        Animator.SetTrigger("attack");
+
+        // Aplicar daño al jugador
+>>>>>>> Stashed changes
         if (Player != null)
         {
             Player.GetComponent<PlayerHealth>().TakeDamage(damage);
