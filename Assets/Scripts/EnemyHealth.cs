@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth;
     private int currentHealth;
 
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -19,14 +20,17 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            // Llama al método Die en el componente EnemyYellowNinja
+            GetComponent<EnemyYellowNinja>().Die();
         }
     }
 
+
+
     private void Die()
     {
-        Debug.Log("El enemigo ha muerto");
-        // Aquí puedes agregar lógica para la muerte del enemigo, como reproducir una animación de muerte o destruir el objeto
-        Destroy(gameObject);
+        Debug.Log("El enemigo ha muerto"); // Esto debe imprimirse cuando el enemigo muere
+                                           // ... el resto de tu lógica
     }
+
 }

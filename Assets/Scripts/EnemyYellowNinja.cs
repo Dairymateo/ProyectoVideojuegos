@@ -17,6 +17,8 @@ public class EnemyYellowNinja : MonoBehaviour
     private float maxX;
     public float minDistanceFromPlayer; // Distancia mínima al jugador
 
+    private bool isDead = false; // Estado de muerte del enemigo
+
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -33,6 +35,8 @@ public class EnemyYellowNinja : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return; // Si está muerto, no hace nada
+
         attackTimer += Time.deltaTime;
         FollowPlayer();
         RestrictMovement();
@@ -86,15 +90,28 @@ public class EnemyYellowNinja : MonoBehaviour
 
         attackTimer = 0f;
         Animator.SetTrigger("Attack2");
-
+        
         if (Player != null)
         {
             Player.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 
+    public void Die() // Método para manejar la muerte
+    {
+        if (isDead) return; // Evita múltiples llamadas a la muerte
+
+        isDead = true; // Cambia el estado a muerto
+        Animator.SetTrigger("Morir"); // Activa la animación de muerte
+        Rigidbody2D.velocity = Vector2.zero; // Detiene cualquier movimiento
+        // Otras acciones que quieras realizar al morir, como destruir el objeto después de un tiempo
+        Destroy(gameObject, 2f); // Destruir después de 2 segundos
+    }
+
     private void RestrictMovement()
     {
+        if (isDead) return; // Evita restricciones de movimiento si está muerto
+
         Vector3 position = transform.position;
         position.x = Mathf.Clamp(position.x, minX, maxX);
         transform.position = position;
