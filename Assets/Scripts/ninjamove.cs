@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,22 +36,22 @@ public class NewBehaviourScript : MonoBehaviour
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Girar el personaje en la dirección de movimiento
+        // Girar el personaje en la direcciï¿½n de movimiento
         if (Horizontal < 0.0f) transform.localScale = new Vector3(-6.0f, 6.0f, 6.0f);
         else if (Horizontal > 0.0f) transform.localScale = new Vector3(6.0f, 6.0f, 6.0f);
 
-        // Animación de correr
+        // Animaciï¿½n de correr
         Animator.SetBool("running", Horizontal != 0.0f);
 
-        // Comprobar si está en el suelo
+        // Comprobar si estï¿½ en el suelo
         Debug.DrawRay(transform.position, Vector3.down * 1.2f, Color.yellow);
         Grounded = Physics2D.Raycast(transform.position, Vector3.down, 1.2f);
 
 
-        // Saltar si está en el suelo y se presiona espacio
+        // Saltar si estï¿½ en el suelo y se presiona espacio
         if (Input.GetKeyDown(KeyCode.Space) && Grounded)
         {
-            Debug.Log("El personaje está en el suelo.");
+            Debug.Log("El personaje estï¿½ en el suelo.");
             Jump();
         }
 
@@ -75,7 +75,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Attack()
     {
-        // Activar la animación de ataque
+        // Activar la animaciï¿½n de ataque
         Animator.SetTrigger("Attack");
 
         // Desactivar movimiento durante el ataque
@@ -118,7 +118,7 @@ public class NewBehaviourScript : MonoBehaviour
         isAttacking = false;
     }
 
-    // Dibujar el rango de ataque en el Editor para visualización
+    // Dibujar el rango de ataque en el Editor para visualizaciï¿½n
     private void OnDrawGizmosSelected()
     {
         if (AttackPoint == null)

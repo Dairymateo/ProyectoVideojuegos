@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class EnemyYellowNinja : MonoBehaviour
 
     private float minX;
     private float maxX;
-    public float minDistanceFromPlayer; // Distancia mínima al jugador
+    public float minDistanceFromPlayer; // Distancia mï¿½nima al jugador
 
     private bool isDead = false; // Estado de muerte del enemigo
 
@@ -35,7 +35,7 @@ public class EnemyYellowNinja : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return; // Si está muerto, no hace nada
+        if (isDead) return; // Si estï¿½ muerto, no hace nada
 
         attackTimer += Time.deltaTime;
         FollowPlayer();
@@ -46,7 +46,7 @@ public class EnemyYellowNinja : MonoBehaviour
     {
         if (Player == null)
         {
-            Debug.LogError("Player no está asignado.");
+            Debug.LogError("Player no estï¿½ asignado.");
             return;
         }
 
@@ -72,7 +72,7 @@ public class EnemyYellowNinja : MonoBehaviour
         }
         else
         {
-            Rigidbody2D.velocity = Vector2.zero; // Detiene al enemigo si está demasiado cerca
+            Rigidbody2D.velocity = Vector2.zero; // Detiene al enemigo si estï¿½ demasiado cerca
             Animator.SetBool("running2", false);
         }
     }
@@ -90,27 +90,27 @@ public class EnemyYellowNinja : MonoBehaviour
 
         attackTimer = 0f;
         Animator.SetTrigger("Attack2");
-        
+
         if (Player != null)
         {
             Player.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 
-    public void Die() // Método para manejar la muerte
+    public void Die() // Mï¿½todo para manejar la muerte
     {
-        if (isDead) return; // Evita múltiples llamadas a la muerte
+        if (isDead) return; // Evita mï¿½ltiples llamadas a la muerte
 
         isDead = true; // Cambia el estado a muerto
-        Animator.SetTrigger("Morir"); // Activa la animación de muerte
+        Animator.SetTrigger("Morir"); // Activa la animaciï¿½n de muerte
         Rigidbody2D.velocity = Vector2.zero; // Detiene cualquier movimiento
-        // Otras acciones que quieras realizar al morir, como destruir el objeto después de un tiempo
-        Destroy(gameObject, 2f); // Destruir después de 2 segundos
+        // Otras acciones que quieras realizar al morir, como destruir el objeto despuï¿½s de un tiempo
+        Destroy(gameObject, 2f); // Destruir despuï¿½s de 2 segundos
     }
 
     private void RestrictMovement()
     {
-        if (isDead) return; // Evita restricciones de movimiento si está muerto
+        if (isDead) return; // Evita restricciones de movimiento si estï¿½ muerto
 
         Vector3 position = transform.position;
         position.x = Mathf.Clamp(position.x, minX, maxX);

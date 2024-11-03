@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -29,8 +30,10 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("El jugador ha muerto.");
-        // Aquí puedes implementar la lógica de muerte, como reiniciar el nivel, mostrar una pantalla de "Game Over", etc.
         Destroy(gameObject);  // Esto destruirá al jugador, pero puedes reemplazarlo por otra lógica
+        Debug.Log("Juego terminado. No te queda vida.");
+        SceneManager.LoadScene("GameOver");
+        
     }
 
 }

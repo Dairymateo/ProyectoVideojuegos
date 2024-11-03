@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void EscenaJuego()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game0");
     }
 
     public void Config()
@@ -36,6 +36,11 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("El juego se cerrará."); // Mensaje para verificar en el editor
         Application.Quit();
+    }
+
+    public void VolverAJugar()
+    {
+        SceneManager.LoadScene("Game0");
     }
 
 }
