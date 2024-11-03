@@ -21,6 +21,9 @@ public class NewBehaviourScript : MonoBehaviour
     private float attackCooldown;
     private float lastAttackTime;
 
+    // Variable para el AudioSource
+    public AudioSource attackSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +80,12 @@ public class NewBehaviourScript : MonoBehaviour
 
         // Desactivar movimiento durante el ataque
         isAttacking = true;
+
+        // Reproducir sonido de ataque
+        if (attackSound != null)
+        {
+            attackSound.Play();
+        }
 
         // Registrar el momento del ataque para el cooldown
         lastAttackTime = Time.time;
