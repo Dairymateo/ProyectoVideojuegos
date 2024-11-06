@@ -105,7 +105,7 @@ public class EnemyYellowNinja : MonoBehaviour
         Animator.SetTrigger("Morir"); // Activa la animaci�n de muerte
         Rigidbody2D.velocity = Vector2.zero; // Detiene cualquier movimiento
         // Otras acciones que quieras realizar al morir, como destruir el objeto despu�s de un tiempo
-        Destroy(gameObject, 2f); // Destruir despu�s de 2 segundos
+        Destroy(gameObject, 2f); // Destruir despu�s de 3 segundos
     }
 
     private void RestrictMovement()
